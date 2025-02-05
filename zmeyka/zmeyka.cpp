@@ -101,6 +101,25 @@ private:
         snake[0] = newHead;
     }
 
+    void showGameOverMenu() {
+        char choice;
+        cout << "Game Over! Final Score: " << score << endl;
+        cout << "Press 'R' to restart or 'Q' to quit: ";
+        choice = _getch();
+        if (choice == 'r' || choice == 'R') {
+            gameOver = false;
+            snakeLength = 1;
+            snake[0] = { WIDTH / 2, HEIGHT / 2 };
+            dir = RIGHT;
+            score = 0;
+            generateFood();
+            play();
+        }
+        else if (choice == 'q' || choice == 'Q') {
+            exit(0);
+        }
+    }
+
 public:
     SnakeGame() : gameOver(false), score(0), dir(RIGHT), snakeLength(1) {
         snake[0] = { WIDTH / 2, HEIGHT / 2 };
@@ -122,7 +141,7 @@ public:
             drawBoard();
             Sleep(100);
         }
-        cout << "Game over! Final score: " << score << endl;
+        showGameOverMenu();
     }
 };
 
